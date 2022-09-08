@@ -1,0 +1,372 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Splash screen Management</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Splash screen Management</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+
+  <!-- Content Header (Page header) -->
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="aps-top-box">
+            <div class="aps-left-header">
+              <!-- <div class="input-group search-group">
+                  <input type="text" class="form-control"  placeholder="Search.." name="texts"   [(ngModel)]="search.texts"  />
+                  <div class="input-group-append">
+                    <button class="btn-success" type="button" (click)="searchDataTrucks()"  >
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+ </div> -->
+              <!-- <div class="input-group search-group"> -->
+              <!--                <input type="text" class="form-control" placeholder="Search..">-->
+              <!--                <div class="input-group-append">-->
+              <!--                  <button class="btn btn-success" type="button">-->
+              <!--                    <i class="fas fa-search"></i>-->
+              <!--                  </button>-->
+              <!--                </div>-->
+              <!-- </div> -->
+              <a href="#" class="btn btn-info btn-add-tp add-btn" data-toggle="modal" data-target="#AddFormModal">
+                <i class="icon-plus"></i> Add</a>
+            </div>
+          </div>
+
+          <!-- /.card start -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Splash screen Management List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="datatable table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Heading Text</th>
+                    <th>Image</th>
+                    <th>Main Content</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of list; let i=index;">
+                    <td>{{item.headingtext}}</td>
+                    <td><img src="{{item.image}}" /></td>
+                    <td>{{item.mainContent}}</td>
+                    <td>{{item.Date}}</td>
+                    <td>{{item.status}}</td>
+
+                    <td>
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" [checked]="item.status=='Active'?true:false"
+                          (click)="changeStatus(item.status, item._id)" class="custom-control-input"
+                          id="customSwitches{{i}}" />
+                        <label class="custom-control-label" for="customSwitches{{i}}"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button type="button" (click)="viewDetails(item)" data-toggle="modal"
+                          data-target="#ViewFormModal" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                        <button type="button" (click)="getDetails(item._id)" style="margin-left: 4px;"
+                          data-toggle="modal" data-target="#EditFormModal" class="btn btn-primary"><i
+                            class="fas fa-edit"></i></button>
+                        <button type="button" (click)="delVal(item._id)" style="margin-left: 4px;" data-toggle="modal"
+                          data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+
+
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+</div>
+
+
+
+<!-- View Modal -->
+<div class="modal fade" id="ViewFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog addForm-modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">View</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <form *ngIf="viewdetail.name"> -->
+        <form>
+          <div class="form-row">
+            <div class="col form-group">
+              <!-- <label>Title </label> -->
+              <!-- <p>{{viewdetail.address}}</p> -->
+              <p></p>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Heading Text </label>
+              <p>{{viewdetail.headingtext}}</p>
+              <!-- <p>Ratnesh</p> -->
+            </div>
+
+          </div>
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Main Containt</label>
+              <p>{{viewdetail.mainContent}}</p>
+              <!-- <p>Yadav</p> -->
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Image </label>
+              <p> <img src="{{viewdetail.image}}" /></p>
+              <!-- <p>Yadav</p> -->
+            </div>
+          </div>
+
+
+          <!-- form-row end.// -->
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Date</label>
+              <p>{{viewdetail.Date}}</p>
+              <!-- <p>Yadav</p> -->
+            </div>
+          </div>
+
+
+          <!-- form-row.// -->
+          <!-- <div class="form-row">
+              <div class="col form-group">
+                <label>Address </label>
+                 <p>{{viewdetail.address}}</p> 
+                <p>Faridabad</p>
+              </div>
+            </div> -->
+
+
+          <!-- form-group// -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="EditFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog addForm-modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+        <button type="button" (click)="reset()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="applicantEditForm" method="post">
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Heading Text </label>
+              <input type="text" class="form-control" formControlName="headingtext" required placeholder="">
+              <span style="color: red;padding-left: 10px;font-size: 14px;padding-top: 5px;display: inline-block;"
+                *ngIf="applicantEditForm.controls.headingtext.errors && submitStatus">
+                Please enter headingtext</span>
+            </div>
+          </div>
+          <!-- <div class="form-row">
+            <div class="col form-group">
+              <label>Image </label><br>
+              <input type="file" class="form-control-image" formControlName="mainContent" required placeholder="">
+              <span style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="applicantEditForm.controls.mainContent.errors && submitStatus">
+                Please enter truck brand</span>
+            </div>
+          </div> -->
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Main Content </label>
+              <textarea type="text" class="form-control" formControlName="mainContent" required placeholder="" rows="4"
+                cols="50"></textarea>
+              <span style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="applicantEditForm.controls.mainContent.errors && submitStatus">
+                Please enter Main Content </span>
+            </div>
+          </div>
+
+          <!-- form-row.// -->
+
+
+          <!-- <div class="form-row">
+              <div class="col form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" formControlName="address"  placeholder="">
+                <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantEditForm.controls.address.errors && submitStatus">
+                              Please enter valid address</span>
+              </div>
+            </div> -->
+
+
+          <div class="buttons-footer">
+            <button type="button" (click)="reset()" data-dismiss="modal" aria-label="Close"
+              class="btn-sm btn-primary">Cancel</button>
+            <button type="button" (click)="UpdateApplicant()" style="margin-left: 10px;"
+              class="btn-sm btn-success">Submit</button>
+          </div>
+          <!-- form-group end.// -->
+          <!-- form-group// -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--add modal  -->
+<div class="modal fade" id="AddFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog addForm-modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add</h5>
+        <button type="button" (click)="reset()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="applicantForm" method="post">
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Heading Text</label>
+              <!-- <input type="text" class="form-control" (keyup)="setFormatimage($event)"  -->
+              <input type="text" class="form-control" formControlName="headingtext" required placeholder="">
+              <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantForm.controls.headingtext.errors && submitStatus">
+                Please enter headingtext</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Main Content</label>
+              <textarea type="text" class="form-control" formControlName="mainContent" required placeholder="" rows="4"
+                cols="50"></textarea>
+              <span style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="applicantForm.controls.mainContent.errors && submitStatus">
+                Please enter mainContent</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col form-group">
+              <label>Image </label><br>
+              <!-- <input type="text" class="form-control" (keyup)="setFormatimage($event)"  -->
+              <input type="file" class="form-control-image" formControlName="image" required placeholder="">
+              <span style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="applicantForm.controls.image.errors && submitStatus">
+                Please enter image</span>
+            </div>
+          </div>
+
+
+          <!-- form-row end.// -->
+
+          <!-- form-row.// -->
+
+          <div class="buttons-footer">
+            <button type="button" (click)="reset()" class="btn-sm btn-primary">Reset</button>
+            <button type="button" (click)="createApplicant()" style="margin-left: 10px;"
+              class="btn-sm btn-success">Submit</button>
+          </div>
+          <!-- form-group end.// -->
+          <!-- form-group// -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog addForm-modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--        <h5 class="modal-title">Add</h5>-->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="modal-title">Do you want to delete this truck ?</h5>
+
+        <div class="buttons-footer" style="float: right;">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="btn-sm btn-info">No</button>
+          <button type="button" (click)="deleteApplicant()" style="margin-left: 10px;" data-dismiss="modal"
+            aria-label="Close" class="btn-sm btn-danger">Yes</button>
+        </div>
+        <!-- form-group end.// -->
+      </div>
+    </div>
+  </div>
+</div>

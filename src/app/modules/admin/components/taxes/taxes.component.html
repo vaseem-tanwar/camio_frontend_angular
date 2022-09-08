@@ -1,0 +1,405 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Taxes</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Taxes</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+  
+  
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="aps-top-box">
+              <div class="aps-left-header" >
+                <!-- <div class="input-group search-group">
+                  <input type="text" class="form-control"  placeholder="Search.." name="texts"   [(ngModel)]="search.texts"  />
+                  <div class="input-group-append">
+                    <button class="btn-success" type="button" (click)="searchDataTaxes()"  >
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+ </div> -->
+                <!-- <div class="input-group search-group"> -->
+                  <!--                <input type="text" class="form-control" placeholder="Search..">-->
+                  <!--                <div class="input-group-append">-->
+                  <!--                  <button class="btn btn-success" type="button">-->
+                  <!--                    <i class="fas fa-search"></i>-->
+                  <!--                  </button>-->
+                  <!--                </div>-->
+                <!-- </div> -->
+                <a href="#" class="btn btn-info btn-add-tp add-btn" data-toggle="modal" data-target="#AddFormModal">
+                  <i class="icon-plus"></i> Add</a>
+              </div>
+            </div>
+        <!-- /.card start -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tax List</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example1" class="datatable table table-bordered table-striped">
+              <thead>
+              <tr>        
+  
+                <th>Tax name</th>          
+                <th>Tax rate</th>
+                <th>Status</th>
+                <th>Action</th>
+  
+                
+              </tr>
+              </thead>
+              <tbody>
+               <tr *ngFor="let item of list; let i=index;">
+  
+                <td>{{item.taxname}}</td>
+                <td>{{item.taxrate}}</td>
+                <td>{{item.status}}</td>
+  
+                <td>
+                  <div class="custom-control custom-switch" >
+                    <input type = "checkbox" [checked]="item.status=='Active'?true:false"
+                           (click)="changeTaxStatus(item.status, item._id)"
+                           class="custom-control-input" id="customSwitches{{i}}" />
+                    <label class="custom-control-label" for="customSwitches{{i}}"></label>
+                  </div>
+                </td>
+                <td>
+                  <div class="btn-group btn-group-sm">
+                    <button type="button" (click)="viewDetails(item)" data-toggle="modal" data-target="#ViewFormModal" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                    <button type="button" (click)="getDetails(item._id)" style="margin-left: 4px;" data-toggle="modal" data-target="#EditFormModal" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                 <button type="button" (click)="delVal(item._id)" style="margin-left: 4px;" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr> 
+  
+              <!-- <tr>
+                <td>Ratnesh</td>
+                <td>Yadav</td>
+                <td>ratnesh.yadav@brainiuminfotech.com</td>
+                <td>Faridabad</td>
+                <td>Active</td>
+                <td>9876543210</td>
+                <td><div class="btn-group btn-group-sm">
+                  <button type="button" (click)="viewDetails('item')" data-toggle="modal" data-target="#ViewFormModal" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                  <button type="button" (click)="getDetails('item._id')" style="margin-left: 4px;" data-toggle="modal" data-target="#EditFormModal" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                  <button type="button" (click)="delVal('item._id')" class="btn btn-danger" style="margin-left: 4px;" data-toggle="modal" data-target="#DeleteModal"><i class="fas fa-trash"></i></button>
+                </div></td>
+              </tr> -->
+              </tbody>
+  
+            </table>
+  
+            <!-- /.Pgination -->
+  <!--          <div class="" style="width: 530px; margin: auto;">-->
+  <!--            <div class="bootstrap-pagination text-center"   >-->
+  <!--              <nav>-->
+  <!--                <ul class="pagination" *ngIf="pager.pages && pager.pages.length" >-->
+  
+  <!--                  <li  class="page-item"-->
+  <!--                       (click)="setPage(1)"-->
+  <!--                       [ngClass]="{disabled:pager.currentPage === 1}" >-->
+  <!--                    <a class="page-link"-->
+  <!--                       href="javascript:void(0)"-->
+  <!--                    > First</a>-->
+  <!--                  </li>-->
+  
+  <!--                  <li class="page-item"-->
+  <!--                      (click)="setPage(pager.currentPage - 1)"-->
+  <!--                      [ngClass]="{disabled:pager.currentPage === 1}">-->
+  <!--                    <a class="page-link"-->
+  <!--                       href="javascript:void(0)"-->
+  <!--                    >Previous</a>-->
+  <!--                  </li>-->
+  
+  <!--                  <li class="page-item"-->
+  <!--                      *ngFor="let page of pager.pages"-->
+  <!--                      [ngClass]="{active:pager.currentPage === page}"-->
+  <!--                      (click)="setPage(page)" >-->
+  <!--                    <a class="page-link"-->
+  <!--                       href="javascript:void(0)"-->
+  <!--                    >{{page}}</a>-->
+  <!--                  </li>-->
+  
+  <!--                  <li class="page-item"-->
+  <!--                      [ngClass]="{disabled:pager.currentPage === pager.totalPages}"-->
+  <!--                      (click)="setPage(pager.currentPage + 1)" >-->
+  <!--                    <a class="page-link"-->
+  <!--                       href="javascript:void(0)"-->
+  <!--                    >Next</a>-->
+  <!--                  </li>-->
+  <!--                  <li class="page-item"-->
+  <!--                      [ngClass]="{disabled:pager.currentPage === pager.totalPages}"-->
+  <!--                      (click)="setPage(pager.totalPages)" >-->
+  <!--                    <a class="page-link"-->
+  <!--                       href="javascript:void(0)"-->
+  <!--                    >Last</a>-->
+  <!--                  </li>-->
+  
+  <!--                </ul>-->
+  <!--              </nav>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--          <pagination-controls class="text-right" (pageChange)="p = $event"></pagination-controls>-->
+          </div>
+  
+  
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+          </div>
+        </div>
+  
+  
+      </div>
+    </section>
+  </div>
+  
+  
+  
+  <!-- View Modal -->
+  <div class="modal fade" id="ViewFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog addForm-modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">View</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- <form *ngIf="viewdetail.name"> -->
+            <form>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label>Title </label>
+                  <!-- <p>{{viewdetail.address}}</p> -->
+                  <p></p>
+                </div>
+              </div>
+  
+            <div class="form-row">
+              <div class="col form-group">
+                <label>Tax Name </label>
+                <p>{{viewdetail.taxname}}</p>
+                <!-- <p>Ratnesh</p> -->
+              </div>
+            </div>
+            <!-- form-row end.// -->
+            <div class="form-row">
+              <div class="col form-group">
+                <label>Tax Rate</label>
+               <p>{{viewdetail.taxrate}}</p> 
+                <!-- <p>Yadav</p> -->
+              </div>
+            </div>
+  
+  
+            <!-- form-row.// -->
+            <!-- <div class="form-row">
+              <div class="col form-group">
+                <label>Address </label>
+                 <p>{{viewdetail.address}}</p> 
+                <p>Faridabad</p>
+              </div>
+            </div> -->
+  
+  
+            <!-- form-group// -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="EditFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog addForm-modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit</h5>
+          <button type="button" (click)="reset()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="applicantEditForm" method="post">
+            <!--          <div class="form-group">-->
+            <!--            <label for="">Profile Image <span style="color: #aba8a8">(Supported file formats: png, jpg)</span></label>-->
+            <!--            <div class="input-group">-->
+            <!--              <div class="custom-file">-->
+            <!--                <input type="file" #myInput (change)="handleUpload($event, 'image')"  accept="image/png, image/jpg, image/jpeg"   >-->
+            <!--                &lt;!&ndash;                        <label class="custom-file-label" for="">Choose File</label>&ndash;&gt;-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <span style="color: red;-->
+            <!--          padding-left: 10px;-->
+            <!--          font-size: 14px;-->
+            <!--          padding-top: 5px;-->
+            <!--          display: inline-block;" *ngIf="!image && submitStatus">-->
+            <!--                            Please select your profile image</span>-->
+            <!--          </div>-->
+          
+  
+            <div class="form-row">
+              <div class="col form-group">
+                <label>Tax Name </label>
+                <input type="text" class="form-control" formControlName="taxname"  required placeholder="">
+                <span style="color: red;padding-left: 10px;font-size: 14px;padding-top: 5px;display: inline-block;" *ngIf="applicantEditForm.controls.taxname.errors && submitStatus">
+                              Please enter taxname</span>
+              </div>
+            </div>
+  
+          
+  
+            <div class="form-row">
+              <div class="col form-group">
+                <label>Tax Rate </label>
+                <input type="text" class="form-control" formControlName="taxrate"  required placeholder="">
+                <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantEditForm.controls.taxrate.errors && submitStatus">
+                              Please enter taxrate</span>
+              </div>
+            </div>
+            <!-- form-row.// -->
+        
+  
+            <!-- <div class="form-row">
+              <div class="col form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" formControlName="address"  placeholder="">
+                <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantEditForm.controls.address.errors && submitStatus">
+                              Please enter valid address</span>
+              </div>
+            </div> -->
+  
+  
+            <div class="buttons-footer">
+              <button type="button" (click)="reset()" data-dismiss="modal" aria-label="Close" class="btn-sm btn-primary">Cancel</button>
+              <button type="button"  (click)="UpdateApplicant()" style="margin-left: 10px;" class="btn-sm btn-success">Submit</button>
+            </div>
+            <!-- form-group end.// -->
+            <!-- form-group// -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <!--add modal  -->
+  <div class="modal fade" id="AddFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog addForm-modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add</h5>
+         <button type="button" (click)="reset()" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="applicantForm" method="post">
+  <!--          <div class="form-group">-->
+  <!--            <label for="">Profile Image <span style="color: #aba8a8">(Supported file formats: png, jpg)</span></label>-->
+  <!--            <div class="input-group">-->
+  <!--              <div class="custom-file">-->
+  <!--                <input type="file" #myInput (change)="handleUpload($event, 'image')"  accept="image/png, image/jpg, image/jpeg"   >-->
+  <!--                &lt;!&ndash;                        <label class="custom-file-label" for="">Choose File</label>&ndash;&gt;-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--            <span style="color: red;-->
+  <!--          padding-left: 10px;-->
+  <!--          font-size: 14px;-->
+  <!--          padding-top: 5px;-->
+  <!--          display: inline-block;" *ngIf="!image && submitStatus">-->
+  <!--                            Please select your profile image</span>-->
+  <!--          </div>-->
+            <div class="form-row">
+              <div class="col form-group">
+                <label>taxname </label>
+                <input type="text" class="form-control" formControlName="taxname"  required placeholder="">
+                <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantForm.controls.taxname.errors && submitStatus">
+                              Please enter taxname</span>
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="col form-group">
+                <label>taxrate </label>
+                <input type="text" class="form-control" formControlName="taxrate"  required placeholder="">
+                <span style="color: red;
+            padding-left: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            display: inline-block;" *ngIf="applicantForm.controls.taxrate.errors && submitStatus">
+                              Please enter taxrate</span>
+              </div>
+            </div>
+            <!-- form-row end.// -->
+           
+            <!-- form-row.// -->
+  
+            <div class="buttons-footer">
+              <button type="button" (click)="reset()" class="btn-sm btn-primary">Reset</button>
+              <button type="button"  (click)="createApplicant()" style="margin-left: 10px;" class="btn-sm btn-success">Submit</button>
+            </div>
+            <!-- form-group end.// -->
+            <!-- form-group// -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete Modal -->
+  
+  <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog addForm-modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!--        <h5 class="modal-title">Add</h5>-->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5 class="modal-title">Do you want to Delete this data ?</h5>
+  
+          <div class="buttons-footer" style="float: right;">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="btn-sm btn-info">No</button>
+            <button type="button" (click)="deleteApplicant()" style="margin-left: 10px;" data-dismiss="modal" aria-label="Close" class="btn-sm btn-danger">Yes</button>
+          </div>
+          <!-- form-group end.// -->
+        </div>
+      </div>
+    </div>
+  </div>

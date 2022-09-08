@@ -1,0 +1,172 @@
+<form [formGroup]="signupForm" method="post">
+  <div class="bg-color">
+    <div class="container">
+      <h1>Register</h1>
+      <hr>
+      <p>Please fill in this form to create an account</p>
+      <br>
+      <div class="input-group mb-3">
+  
+        <label for="firstname"><b>First Name</b></label>
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstname" id="firstname" required>
+    </div>
+    <div style="color: red;
+    padding-left: 10px;
+    font-size: 14px;
+    padding-top: 5px;
+    display: inline-block;" *ngIf="signupForm.controls.firstname.errors && submitStatus">
+  Please enter valid First Name</div>
+
+    <div class="input-group mb-3">
+  
+      <label for="lastname"><b>Last Name</b></label>
+      <input type="text" class="form-control" placeholder="Last name" formControlName="lastname" id="lastname" required>
+  </div>
+  <div style="color: red;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-top: 5px;
+  display: inline-block;" *ngIf="signupForm.controls.lastname.errors && submitStatus">
+Please enter valid Last Name</div>
+
+      <div class="input-group mb-3">
+  
+      <label for="email"><b>Email</b></label>
+      <input type="text" class="form-control" placeholder="Enter Email" formControlName="email" id="email" required>
+  </div>
+  <div style="color: red;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-top: 5px;
+  display: inline-block;" *ngIf="signupForm.controls.email.errors && submitStatus">
+Please enter valid email</div>
+
+  <div class="input-group mb-3">
+  
+      <label for="password"><b>Password</b></label>
+      <input type="password" class="form-control" placeholder="Enter Password" formControlName="password" id="password" required>
+  </div>
+  <div style="color: red;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-top: 5px;
+  display: inline-block;" *ngIf="signupForm.controls.password.errors && submitStatus">
+Please enter valid Password</div>
+
+  <!-- <div class="input-group mb-3">
+      <label for="role"><b>Role</b></label>
+      <input type="text" class="form-control" placeholder="Role" formControlName="role" id="role" required>
+      </div>
+      <div style="color: red;
+      padding-left: 10px;
+      font-size: 14px;
+      padding-top: 5px;
+      display: inline-block;" *ngIf="signupForm.controls.role.errors && submitStatus">
+    Please enter valid Role</div> -->
+    
+    <div class="input-group mb-3">
+      <label for="status"><b>Status</b></label>
+  
+          </div>
+      <div class="input-group mb-3">
+        
+        
+          <select class="form-control select2" (change)="getStatus($event)" id="status" name="status" formcontrolname="status" style="width: 80%;">
+            <option value="" selected disabled>Please Select status</option>
+            <option value="Active">Active</option>
+            <option value="InActive">InActive</option>
+                    </select>
+  
+            <!-- <input type="text" class="form-control" placeholder="status" formControlName="status" id="status" required> -->
+        </div>
+        <div style="color: red;
+        padding-left: 10px;
+        font-size: 14px;
+        padding-top: 5px;
+        display: inline-block;" *ngIf="signupForm.controls.status.errors && submitStatus">
+      Please enter valid Status</div>
+
+      <!-- <div class="input-group mb-3">
+        <select class="form-control select2 status " (change)="getStatus($event)" id="status" name="status" formcontrolname="status" style="width: 80%;">
+          <option value="" disabled>Please Select Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        <div style="color: red;
+        padding-left: 10px;
+        font-size: 14px;
+        padding-top: 5px;
+        display: inline-block;" *ngIf="signupForm.controls.status.errors && submitStatus">
+          Select status</div>
+      </div> -->
+
+      <div class="input-group mb-3">
+        <label for="phone"><b>Phone</b></label>
+        <input type="text" class="form-control" maxlength="10" pattern="[0-9]{10}" onkeypress="return event.charCode>=48 && event.charCode<=57" placeholder="Phone" formControlName="phone" id="phone" required>
+        <div style="color: red;
+        padding-left: 10px;
+        font-size: 14px;
+        margin-top: -20px;
+        display: inline-block;" *ngIf="signupForm.controls.phone.errors || submitStatus">
+      Please enter valid Phone</div>
+      </div>
+
+      <div class="input-group mb-3">
+        <select class="form-control select2 role" (change)="getVal($event)" id="role" name="role" formcontrolname="role" style="width: 80%;">
+          <!-- <option value="" selected disabled>Please Select Role</option> -->
+          <option value="admin">Admin</option>
+          <option value="shipper">Shippers</option>
+          <option value="truck_driver">Truck Driver</option>
+          <option value="truck_owner">Truck Owner</option>
+        </select>
+        <div style="color: red;
+        padding-left: 10px;
+        font-size: 14px;
+        padding-top: 5px;
+        display: inline-block;" *ngIf="signupForm.controls.role.errors && submitStatus">
+          Select role</div>
+<!--          <div class="input-group-append">-->
+<!--            <div class="input-group-text">-->
+<!--              <span class="fas fa-user"></span>-->
+<!--            </div>-->
+<!--          </div>-->
+      </div>
+      
+      <div class="input-group mb-3">
+  
+        <label for="city"><b>City</b></label>
+        <input type="text" class="form-control" placeholder="city" formControlName="city" id="city" required>
+    </div>
+    <div style="color: red;
+    padding-left: 10px;
+    font-size: 14px;
+    padding-top: 5px;
+    display: inline-block;" *ngIf="signupForm.controls.city.errors && submitStatus">
+  Please enter valid city</div>
+
+  <div class="input-group mb-3">
+  
+    <label for="country"><b>Country</b></label>
+    <input type="text" class="form-control" placeholder="country" formControlName="country" id="country" required>
+</div>
+<div style="color: red;
+padding-left: 10px;
+font-size: 14px;
+padding-top: 5px;
+display: inline-block;" *ngIf="signupForm.controls.country.errors && submitStatus">
+Please enter valid Country</div>
+      <hr>
+      <!-- <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p> -->
+  
+      <!-- <button type="submit" class="registerbtn">Register</button> -->
+      <div class="col-12">
+        <button type="button" (click)="onRegister()" class="registerbtn" routerLink="/login">Register</button>
+      </div>
+    </div>
+    
+    <div class="container signin">
+      <p>Already have an account? <a routerLink="/login">Sign in</a>.</p>
+    </div>
+  </div>
+  
+</form>

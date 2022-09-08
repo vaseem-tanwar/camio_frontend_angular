@@ -1,0 +1,96 @@
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a href="#" class="h1"><b>Camio</b> </a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form [formGroup]="loginForm" method="post">
+          <div class="input-group mb-3">
+            <input type="email" formControlName="email"  class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="loginForm.controls.email.errors && submitStatus">
+            Please enter valid email</div>
+
+          <div class="input-group mb-3">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div style="color: red;
+              padding-left: 10px;
+              font-size: 14px;
+              padding-top: 5px;
+              display: inline-block;" *ngIf="loginForm.controls.password.errors && submitStatus">
+            Please enter password</div>
+          <!-- <div class="input-group mb-3">
+            <select class="form-control select2 role" (change)="getVal($event)" id="role" name="role"
+              formcontrolname="role" style="width: 80%;">
+              <option value="" selected="selected">Select role</option>
+              <option value="admin">Admin</option>
+              <option value="basic">Basic</option>
+            </select>
+            <div style="color: red;
+                padding-left: 10px;
+                font-size: 14px;
+                padding-top: 5px;
+                display: inline-block;" *ngIf="loginForm.controls.role.errors && submitStatus">
+              Please select role</div>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div> -->
+
+          
+          <div class="row">
+            <!--          <div class="col-8">-->
+            <!--            <div class="icheck-primary">-->
+            <!--              <input type="checkbox" id="remember">-->
+            <!--              <label for="remember">-->
+            <!--                Remember Me-->
+            <!--              </label>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <!-- /.col -->
+
+            <div class="col-12">
+              <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+
+        </form>
+        <div class="row">
+          <div class="col-12">
+            <a routerLink="/signup" style="color:dodgerblue">Register Here</a>
+            </div>
+        </div>
+
+        <!--      <p class="mb-1">-->
+        <!--        <a href="#">I forgot my password</a>-->
+        <!--      </p>-->
+
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.login-box -->
+</body>
